@@ -98,7 +98,7 @@ INSERT INTO `penjualan` (`id_penjualan`, `id_Mobil`, `tanggal_penjualan`, `disko
 CREATE TABLE `user` (
   `id_user` varchar(6) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(65) NOT NULL,
   `role` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `telepon` int(11) NOT NULL
@@ -109,8 +109,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `role`, `email`, `telepon`) VALUES
-('US001', 'admin', 'admin', 'Admin', 'admin123@gmai.com', 81319021),
-('US002', 'kasir', 'kasir', 'Kasir', 'kasir123@gmail.com', 1293123);
+('US001', 'admin', '$2y$10$fkg8TfobRZ.vYxZfSrrXM.rB.wmily0KwEa5/65NJaWIFeZ.zw3nK', 'Admin', 'admin123@gmai.com', 81319021),
+('US002', 'kasir', '$2y$10$yZ5KQj55o1pqiSFb9X37x.GcIT./MtfXjrC1ZN0HwnUCg5ZywITX2', 'Kasir', 'kasir123@gmail.com', 1293123);
 
 --
 -- Indexes for dumped tables

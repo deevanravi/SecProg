@@ -99,7 +99,7 @@
                               while ($data = mysqli_fetch_array($hasil)) {
                               $no++;
                           ?>
-                              <option value="<?php echo $data['id_Mobil'];?>"><?php echo $data['nama_Mobil'];?></option>
+                              <option value="<?php echo htmlspecialchars($data['id_Mobil']);?>"><?php echo htmlspecialchars($data['nama_Mobil']);?></option>
                               <?php 
                               }
                           ?>
@@ -146,21 +146,37 @@
                   $tanggal = date("Y-m-d");
                   $diskon = $_POST['diskon'];
 
-                  $query = "select * from mobil where id_Mobil='$idMobil'";
-                  $select = mysqli_query($con, $query);
-                  $sel = mysqli_fetch_array($select);
+                  $error = false;
+                  if(!isset($diskon)){
+                    $message = "Jangan lupa tentukan diskon";
+                    $error = true;
+                  }
 
-                  $harga = $sel['harga_Mobil'];
-                  $harga = $harga * ((100-$diskon)/100);
-
-                  include 'koneksi.php';
-                  $query="INSERT INTO penjualan VALUES ('$new_id', '$idMobil', '$tanggal','$diskon','$harga')";
-                  mysqli_query($con, $query);
-                  $query2="UPDATE mobil SET stok_Mobil = stok_Mobil - 1 WHERE id_Mobil='$idMobil'";
-                  mysqli_query($con, $query2);
-                  header("location:Read_buku.php");
-                  echo "<script>alert('Data berhasil ditambah');
-                  window.location.href = 'read_penjualan.php';</script>";
+                  if($error === false){
+                    $query = "select * from mobil where id_Mobil='$idMobil'";
+                    $select = mysqli_query($con, $query);
+                    $sel = mysqli_fetch_array($select);
+  
+                    $harga = $sel['harga_Mobil'];
+                    $harga = $harga * ((100-$diskon)/100);
+  
+                    include 'koneksi.php';
+                    $query="INSERT INTO penjualan VALUES (?, ?, ?, ?, ?)";
+                    $stmt = $con->prepare($query);
+                    $stmt->bind_param("ssssi", $new_id, $idMobil, $tanggal, $diskon, $harga);
+                    $stmt->execute();
+                    $stmt->close();
+  
+                    $query2="UPDATE mobil SET stok_Mobil = stok_Mobil - 1 WHERE id_Mobil= ?";
+                    $stmt2 = $con->prepare($query2);
+                    $stmt2->bind_param("s", $idMobil);
+                    $stmt2->execute();
+                    $stmt2->close();
+                    echo "<script>alert('Data berhasil ditambah');window.location.href = 'read_penjualan.php';</script>";
+                  }
+                  else{
+                    echo "<script>alert('$message');window.history.go(-1);</script>";
+                  }
               }
               ?>
           </header>

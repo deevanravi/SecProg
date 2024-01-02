@@ -147,11 +147,11 @@
                     ?>
 
                         <tr class="<?php cekDiskon($diskon) ?>">
-                            <td><?php echo $id; ?></td>
-                            <td><?php echo $nama; ?></td>
-                            <td><?php echo $tanggal; ?></td>
-                            <td><?php echo $diskon."%"; ?></td>
-                            <td><?php echo "Rp. ".$harga; ?></td>
+                            <td><?php echo htmlspecialchars($id); ?></td>
+                            <td><?php echo htmlspecialchars($nama); ?></td>
+                            <td><?php echo htmlspecialchars($tanggal); ?></td>
+                            <td><?php echo htmlspecialchars($diskon)."%"; ?></td>
+                            <td><?php echo "Rp. ".htmlspecialchars($harga); ?></td>
                         </tr>
                     <?php } ?>
                 </table>

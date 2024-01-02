@@ -7,9 +7,9 @@
             $username=$_POST['username'];
 			$password=$_POST['password'];
 
-            $query = "SELECT * FROM user WHERE username = ? AND password = ?;";
+            $query = "SELECT * FROM user WHERE username = ?;";
             $statement = $con->prepare($query);
-            $statement->bind_param('ss', $username, $password);
+            $statement->bind_param('s', $username);
             $statement->execute();
             $result = $statement->get_result();
 
@@ -17,15 +17,19 @@
 
             if($result->num_rows === 1) {
                 $row = $result->fetch_assoc();
-                
-                $_SESSION["success_message"] = "Login Success";
-                $_SESSION["id"] = $row['id_user'];
-                $_SESSION['login'] = true;
-                $_SESSION['username'] = $row['username'];
-                $_SESSION['role'] = $row['role'];
-                $_SESSION['email'] = $row['email'];
-                $_SESSION['telp'] = $row['telepon'];
-                $role = $row['role'];
+                if(password_verify($password, $row['password'])){
+                    $_SESSION["success_message"] = "Login Success";
+                    $_SESSION["id"] = $row['id_user'];
+                    $_SESSION['login'] = true;
+                    $_SESSION['username'] = $row['username'];
+                    $_SESSION['role'] = $row['role'];
+                    $_SESSION['email'] = $row['email'];
+                    $_SESSION['telp'] = $row['telepon'];
+                    $role = $row['role'];
+                }
+                else{
+                    header('location: ../index.php');
+                }
 
                 if ($role == "Admin") {
 					echo "<script>alert('selamat datang di halaman admin');</script>";
@@ -34,7 +38,10 @@
 					echo "<script>alert('selamat datang di halaman Kasir');</script>";
 					header('location: ../index_Kasir.html');
 				}
-            } 
+            }
+            else {
+                header('location: ../index.php');
+            }
 
             if (isset($_POST['remember'])){
                 //set up cookie

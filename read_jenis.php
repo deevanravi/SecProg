@@ -111,13 +111,13 @@
                   ?>
                   <tr class="table-light">
                       <td><?php echo $baris ?></td>
-                      <td><?php echo $row['id_jenis_Mobil'] ?></td>
-                      <td><?php echo $row['nama_jenis_Mobil'] ?></td>
-                      <td><?php echo $row['status_jenis_Mobil'] ?></td>
+                      <td><?php echo htmlspecialchars($row['id_jenis_Mobil']) ?></td>
+                      <td><?php echo htmlspecialchars($row['nama_jenis_Mobil']) ?></td>
+                      <td><?php echo htmlspecialchars($row['status_jenis_Mobil']) ?></td>
                       <td style="text-align:center">
-                          <a  href="ubah_jenis.php?id_jenis_Mobil=<?php echo $row['id_jenis_Mobil'] ?>">Ubah</a> |
+                          <a  href="ubah_jenis.php?id_jenis_Mobil=<?php echo htmlspecialchars($row['id_jenis_Mobil']) ?>">Ubah</a> |
                           &nbsp;
-                          <a href="#" onClick="confirm_modal('./controllers/deleteVehicleController.php?id_Mobil=<?php echo $row['id_jenis_Mobil'] ?>');">Hapus</a>
+                          <a href="#" onClick="confirm_modal('./controllers/deleteVehicleController.php?id_jenis_Mobil=<?php echo $row['id_jenis_Mobil'] ?>');">Hapus</a>
                       </td>
                   </tr>
                   <?php

@@ -79,7 +79,6 @@
                           <td>:</td>
                           <td>
                           <select name="jenis">
-                            <!-- style="item-align:left;"  -->
                           <?php
                               include 'koneksi.php';
                               $sql="select * from jenis_Mobil where status_jenis_Mobil > 0";

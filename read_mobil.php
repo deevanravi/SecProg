@@ -105,14 +105,14 @@
               ?>
               <tr class="table-light">
                   <td><?php echo $baris ?></td>
-                  <td><?php echo $row['id_Mobil'] ?></td>
-                  <td><?php echo $row['nama_jenis_Mobil'] ?></td>
-                  <td><?php echo $row['nama_Mobil'] ?></td>
-                  <td><?php echo $row['stok_Mobil'] ?></td>
-                  <td><?php echo $row['harga_Mobil'] ?></td>
+                  <td><?php echo htmlspecialchars($row['id_Mobil']) ?></td>
+                  <td><?php echo htmlspecialchars($row['nama_jenis_Mobil']) ?></td>
+                  <td><?php echo htmlspecialchars($row['nama_Mobil']) ?></td>
+                  <td><?php echo htmlspecialchars($row['stok_Mobil']) ?></td>
+                  <td><?php echo htmlspecialchars($row['harga_Mobil']) ?></td>
                   <td><?php if($row['stok_Mobil']>0){echo 'Tersedia';}else{echo 'Tidak Tersedia';} ?></td>
                   <td style="text-align:center">
-                      <a  href="ubah_mobil.php?id_Mobil=<?php echo $row['id_Mobil'] ?>">Ubah</a> |
+                      <a  href="ubah_mobil.php?id_Mobil=<?php echo htmlspecialchars($row['id_Mobil']) ?>">Ubah</a> |
                       &nbsp;
                       <a href="#" onClick="confirm_modal('./controllers/deleteVehicleController.php?id_Mobil=<?php echo $row['id_Mobil'] ?>');">Hapus</a>
                   </td>

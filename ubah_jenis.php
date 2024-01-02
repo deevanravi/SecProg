@@ -93,7 +93,7 @@
       <div class="container">
         <header class="col-12 text-center tm-bg-black-transparent p-5 tes">
             <h2 class="text-uppercase mb-3 tm-app-feature-header">Ubah Jenis</h2>
-            <form method="post" action="ubah_jenis_db.php?id_jenis_Mobil=<?php echo $id ?>">
+            <form method="post" action="./controllers/changeCarsController.php?id_jenis_Mobil=<?php echo $id ?>">
               <div class="form-group">
               <table width="1000px" style="item-align:left;">
                     <tr>
